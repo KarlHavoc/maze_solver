@@ -6,7 +6,7 @@ from graphics import Cell
 class Maze:
 
     def __init__(
-        self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win
+        self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None
     ) -> None:
         self.cells = []
         self.x1 = x1
@@ -15,12 +15,19 @@ class Maze:
         self.num_cols = num_cols
         self.cell_size_x = cell_size_x
         self.cell_size_y = cell_size_y
-        self.win = win
+        self.win = None
 
         self.create_cells()
+        self.break_entrance_and_exit()
 
     def create_cells(self):
-        self.cells = [[Cell(self.win) for i in self.num_cols] for i in self.num_rows]
+
+        for i in range(self.num_cols):
+            col_cells = []
+            for j in range(self.num_rows):
+                col_cells.append(Cell(self.win))
+            self.cells.append(col_cells)
+
         for i in range(self.num_cols):
             for j in range(self.num_rows):
                 self.draw_cells(i, j)
@@ -41,3 +48,12 @@ class Maze:
             return
         self.win.redraw()
         time.sleep(0.05)
+
+    def break_entrance_and_exit(self):
+        first_cell = self.cells[0][0]
+        first_cell.has_left_wall = False
+        self.draw_cells(0, 0)
+
+        last_cell = self.cells[len(self.cells)-1][self.num_rows-1]
+        last_cell.has_right_wall = False
+        self.draw_cells(len(self.cells)-1, self.num_rows-1)
