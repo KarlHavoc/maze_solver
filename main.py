@@ -1,4 +1,4 @@
-from graphics import Window
+from graphics import Line, Point, Window
 from maze import Maze
 
 
@@ -13,7 +13,8 @@ def main():
     win = Window(screen_x, screen_y)
 
     maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win, 10)
-
+    # line = Line(Point(10, 10), Point(20, 20))
+    # line.draw(win.canvas)
     win.wait_for_close()
 
 
