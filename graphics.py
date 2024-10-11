@@ -64,9 +64,12 @@ class Cell:
         self.__y1 = None
         self.__y2 = None
         self.window = None
-        
+        self.visited = False
 
     def draw(self, x1, x2, y1, y2):
+        if self.win is None:
+            return
+
         self.__x1 = x1
         self.__x2 = x2
         self.__y1 = y1
@@ -101,8 +104,6 @@ class Cell:
         else:
             line = Line(Point(self.__x1, self.__y2), Point(self.__x2, self.__y2))
             self.__win.draw_line(line, line_color)
-        
-
 
     def draw_move(self, to_cell, undo=False):
         cell_center_x = int((self.__x2 - self.__x1) / 2) + self.__x1
