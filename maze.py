@@ -1,7 +1,7 @@
+import random
 import time
 
-from graphics import Cell
-import random
+from cell import Cell
 
 
 class Maze:
@@ -23,7 +23,6 @@ class Maze:
         self.create_cells()
         self.break_entrance_and_exit()
         self.break_walls_r(0, 0)
-
 
     def create_cells(self):
 
@@ -86,7 +85,9 @@ class Maze:
             else:
                 random_num = random.randrange(len(need_to_visit))
                 direction_to_move = need_to_visit[random_num][2]
-                cell_to_move_to = self.cells[need_to_visit[random_num][0]][need_to_visit[random_num][1]]
+                cell_to_move_to = self.cells[need_to_visit[random_num][0]][
+                    need_to_visit[random_num][1]
+                ]
                 if direction_to_move == "left":
                     current_cell.has_left_wall = False
                     cell_to_move_to.has_right_wall = False
@@ -99,5 +100,6 @@ class Maze:
                 if direction_to_move == "down":
                     current_cell.has_bottom_wall = False
                     cell_to_move_to.has_top_wall = False
-                self.break_walls_r(need_to_visit[random_num][0], need_to_visit[random_num][1])
-                
+                self.break_walls_r(
+                    need_to_visit[random_num][0], need_to_visit[random_num][1]
+                )
