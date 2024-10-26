@@ -52,7 +52,7 @@ class Maze:
         self._cells[i][j].draw(x1, y1, x2, y2)
         self._animate()
 
-    def _animate(self, float=0.02):
+    def _animate(self, float=0.05):
         if self._win is None:
             return
         self._win.redraw()
@@ -140,7 +140,6 @@ class Maze:
             self._cells[i][j].draw_move(self._cells[i + 1][j])
             if self._solve_r(i + 1, j):
                 return True
-            self._animate(1.0)
             self._cells[i][j].draw_move(self._cells[i + 1][j], undo=True)
 
         # left
@@ -152,7 +151,6 @@ class Maze:
             self._cells[i][j].draw_move(self._cells[i - 1][j])
             if self._solve_r(i - 1, j):
                 return True
-            self._animate(1.0)
             self._cells[i][j].draw_move(self._cells[i - 1][j], undo=True)
         # down
         if (
@@ -163,7 +161,6 @@ class Maze:
             self._cells[i][j].draw_move(self._cells[i][j + 1])
             if self._solve_r(i, j + 1):
                 return True
-            self._animate(1.0)
             self._cells[i][j].draw_move(self._cells[i][j + 1], undo=True)
         # up
         if (
@@ -174,7 +171,11 @@ class Maze:
             self._cells[i][j].draw_move(self._cells[i][j - 1])
             if self._solve_r(i, j - 1):
                 return True
-            self._animate(1.0)
             self._cells[i][j].draw_move(self._cells[i][j - 1], undo=True)
 
         return False
+
+    # add bfs algorithm for solving maze
+    # time both algorithms and display which one was the fastest
+    # add functionality for user to solve maze
+    # add options for maze size and option for seed
